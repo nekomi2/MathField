@@ -4,4 +4,4 @@
 [Miro](https://miro.com/app/board/uXjVNZCHNG4=/)
 
 ## Project Proposal
-(Overleaf)[https://www.overleaf.com/9456256662qgrzmwbnwhjf]
+[Project Proposal](https://www.overleaf.com/9456256662qgrzmwbnwhjf)
