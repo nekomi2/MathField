@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     bool walkPointSet;
     public float walkPointRange;
 
-    public float sightRange, attackRange;
+    public float sightRange;
     public bool playerInSightRange;
 
     private void Awake()
@@ -22,7 +22,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        // Check for sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         if (!playerInSightRange) Patroling();
         if (playerInSightRange) ChasePlayer();
@@ -38,14 +37,12 @@ public class Enemy : MonoBehaviour
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        // Walkpoint reached
         if (distanceToWalkPoint.magnitude < 1f)
             walkPointSet = false;
     }
 
     private void SearchWalkPoint()
     {
-        // Calculate random point in range
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
