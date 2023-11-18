@@ -323,10 +323,12 @@ MonoBehaviour:
     army be the last army standing. Engage in combat with opponent armies by coming
     into contact with them. The bigger army survives. You lose if your army is defeated
     by an opposing army.\n\nPick up math powerups/debuffs across the map to increase
-    the size of your army based on the powerup symbol.\n\nSymbols: \n+N -  current
-    army is increased by N\nxN - current army size is multiplied by that amount\n-N
-    - N is subtracted from current army size\n/N - current army size is divided by
-    N"
+    the size of your army based on the powerup symbol. The arena will also become
+    smaller overtime until you are forced to fight your opponent. If you touch the
+    barriers of the arena, you'll lose soldiers in your army.\n\nSymbols: \n+N - 
+    current army is increased by N\nxN - current army size is multiplied by that
+    amount\n-N - N is subtracted from current army size\n/N - current army size is
+    divided by N"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7dae4d62601c29b4795ae28561abc503, type: 2}
   m_sharedMaterial: {fileID: 6862089196463006733, guid: 7dae4d62601c29b4795ae28561abc503, type: 2}

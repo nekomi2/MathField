@@ -8,7 +8,10 @@ public class SceneSwitchScript : MonoBehaviour
 {
     public void switchToInstructions(){
         SceneManager.LoadScene("InstructionsScene", LoadSceneMode.Single);
-        Debug.Log("Scene Loaded");
+    }
+
+    public void switchToGame(){
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
     }
 
     
