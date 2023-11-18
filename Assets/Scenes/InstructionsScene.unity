@@ -318,17 +318,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Movement Controls: W - walk forward, A - Turn Left, S - walk backward,
-    D - Turn Right\n\nYou play as a general of an army and the goal is to grow your
-    army be the last army standing. Engage in combat with opponent armies by coming
-    into contact with them. The bigger army survives. You lose if your army is defeated
-    by an opposing army.\n\nPick up math powerups/debuffs across the map to increase
-    the size of your army based on the powerup symbol. The arena will also become
-    smaller overtime until you are forced to fight your opponent. If you touch the
-    barriers of the arena, you'll lose soldiers in your army.\n\nSymbols: \n+N - 
-    current army is increased by N\nxN - current army size is multiplied by that
-    amount\n-N - N is subtracted from current army size\n/N - current army size is
-    divided by N"
+  m_text: "Movement Controls: \nW - walk forward, A - Turn Left, S - walk backward,
+    D - Turn Right, Shift + W - run forward\n\nYou play as a general of an army and
+    the goal is to grow your army be the last army standing. Engage in combat with
+    opponent armies by coming into contact with them. The bigger army survives. You
+    lose if your army is defeated by an opposing army.\n\nPick up math powerups/debuffs
+    across the map to increase the size of your army based on the powerup symbol.
+    The arena will also become smaller overtime until you are forced to fight your
+    opponent. If you touch the barriers of the arena, you'll lose soldiers in your
+    army.\n\nSymbols: \n+N -  current army is increased by N\nxN - current army size
+    is multiplied by that amount\n-N - N is subtracted from current army size\n/N
+    - current army size is divided by N"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7dae4d62601c29b4795ae28561abc503, type: 2}
   m_sharedMaterial: {fileID: 6862089196463006733, guid: 7dae4d62601c29b4795ae28561abc503, type: 2}
@@ -355,8 +355,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -339.65414, y: 0, z: -340.3385, w: 0}
+  m_margin: {x: -339.65414, y: 0, z: -334.0158, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
