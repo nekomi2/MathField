@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerArmy : MonoBehaviour
+public class PlayerSoldier : MonoBehaviour
 {
     public UnityEngine.AI.NavMeshAgent agent;
-    public Transform player;
+    // public Transform player;
+    public Transform playerArmy;
 
     private void Awake()
     {
-        player = GameObject.Find("Player").transform;
+        playerArmy = GameObject.Find("Player Army").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
@@ -20,6 +21,6 @@ public class PlayerArmy : MonoBehaviour
 
     private void ChasePlayer()
     {
-        agent.SetDestination(player.position);
+        agent.SetDestination(playerArmy.position);
     }
 }
