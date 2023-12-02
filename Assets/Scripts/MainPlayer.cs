@@ -29,7 +29,23 @@ public class MainPlayer : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = transform.forward * moveVertical * speed * Time.deltaTime;
+        Vector3 forward = camera.transform.forward;
+        forward.y = 0;
+        forward.Normalize();
+
+        Vector3 right = camera.transform.right;
+        right.y = 0;
+        right.Normalize();
+
+        Vector3 movement = forward * moveVertical * speed * Time.deltaTime;
+
+        // Use a raycast to find the normal of the terrain
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -Vector3.up, out hit))
+        {
+            // Adjust the movement vector to be perpendicular to the terrain normal
+            movement = Vector3.ProjectOnPlane(movement, hit.normal);
+        }
         controller.Move(movement);
         if (moveHorizontal != 0)
         {
