@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class MainPlayer : MonoBehaviour
 {
-    public float speed = 5.0f; // Speed of the player
-    public float rotationSpeed = 100.0f; // Speed of the camera rotation
+    public float speed = 5.0f;
+    public float rotationSpeed = 100.0f;
     public new Camera camera;
     public GameObject army;
     private CharacterController controller;
-    private Animator anim; // Declare the Animator variable
+    private Animator anim;
 
-    // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -31,33 +30,37 @@ public class MainPlayer : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         Vector3 forward = camera.transform.forward;
-        forward.y = 0; 
+        forward.y = 0;
         forward.Normalize();
 
         Vector3 right = camera.transform.right;
-        right.y = 0; 
+        right.y = 0;
         right.Normalize();
 
-        Vector3 movement = (forward * moveVertical + right * moveHorizontal) * speed * Time.deltaTime;
+        Vector3 movement = forward * moveVertical * speed * Time.deltaTime;
 
-        // Use the CharacterController to move
-        controller.Move(movement);
-
-        if (movement != Vector3.zero)
+        // Use a raycast to find the normal of the terrain
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -Vector3.up, out hit))
         {
-            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
-            toRotation.x = 0; // No rotation around the x-axis
-            toRotation.z = 0; // No rotation around the z-axis
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            // Adjust the movement vector to be perpendicular to the terrain normal
+            movement = Vector3.ProjectOnPlane(movement, hit.normal);
         }
 
-        // Set animator parameters
+        controller.Move(movement);
+
+        if (moveHorizontal != 0)
+        {
+            transform.Rotate(0, moveHorizontal * rotationSpeed * Time.deltaTime, 0);
+        }
+
         anim.SetBool("isWalkingForward", moveVertical > 0);
-        anim.SetBool("IsRunningForward", moveVertical > 0 && Input.GetKey(KeyCode.LeftShift));
         anim.SetBool("isWalkingBackward", moveVertical < 0);
-        // 'isDead' remains false until the player dies
+        anim.SetBool("IsRunningForward", moveVertical > 0 && Input.GetKey(KeyCode.LeftShift));
     }
 
-    public void ChangeArmySize(){
+
+    public void ChangeArmySize()
+    {
     }
 }
