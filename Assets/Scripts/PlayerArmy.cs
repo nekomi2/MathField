@@ -9,7 +9,7 @@ public class PlayerArmy : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("MaleCharacter").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
