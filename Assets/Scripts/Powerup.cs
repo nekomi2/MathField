@@ -7,7 +7,6 @@ public class Powerup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -16,13 +15,13 @@ public class Powerup : MonoBehaviour
         
     }
 
-    void onTriggerEnter(Collider other)
+    void OnTriggerEnter (Collider other)
     {
-        Debug.Log("Powerup collected");
         if (other.CompareTag("Player"))
         {
+            Player player = other.GetComponent<Player>();
+            player.increaseArmySize();
             Destroy(gameObject);
         }
     }
-
 }
