@@ -30,8 +30,7 @@ public class MainPlayer : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         Vector3 movement = transform.forward * moveVertical * speed * Time.deltaTime;
-        transform.Translate(movement, Space.World);
-
+        controller.Move(movement);
         if (moveHorizontal != 0)
         {
             transform.Rotate(0, moveHorizontal * rotationSpeed * Time.deltaTime, 0);
