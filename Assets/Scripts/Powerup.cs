@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Poweruo : MonoBehaviour
+public class Powerup : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,4 +15,14 @@ public class Poweruo : MonoBehaviour
     {
         
     }
+
+    void onTriggerEnter(Collider other)
+    {
+        Debug.Log("Powerup collected");
+        if (other.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }

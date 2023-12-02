@@ -29,7 +29,6 @@ public class Enemy : MonoBehaviour
 
     private void Patroling()
     {
-        Debug.Log("Patroling");
         if (!walkPointSet) SearchWalkPoint();
 
         if (walkPointSet)
@@ -54,8 +53,6 @@ public class Enemy : MonoBehaviour
 
     private void ChasePlayer()
     {
-        Debug.Log("Chasing player");
-        Debug.Log(player.position);
         agent.SetDestination(player.position);
     }
 }

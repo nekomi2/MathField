@@ -4,36 +4,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 5.0f; // Speed of the player
-    public float rotationSpeed = 100.0f; // Speed of the camera rotation
-    public new Camera camera;
-    public GameObject army;
+    public float moveSpeed = 5.0f; 
+    public float rotationSpeed = 100.0f; 
+    public Camera camera;
 
-    // Update is called once per frame
     void Update()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
-
-        Vector3 forward = camera.transform.forward;
-        forward.y = 0; 
-        forward.Normalize();
-
-        Vector3 right = camera.transform.right;
-        right.y = 0; 
-        right.Normalize();
-
-        Vector3 movement = (forward * moveVertical + right * moveHorizontal) * speed * Time.deltaTime;
-
+        Vector3 movement = transform.forward * moveVertical * moveSpeed * Time.deltaTime;
         transform.Translate(movement, Space.World);
 
-        if (movement != Vector3.zero)
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        if (moveHorizontal != 0)
         {
-            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-        }
-    }
+            transform.Rotate(0, moveHorizontal * rotationSpeed * Time.deltaTime, 0);
 
-    public void ChangeArmySize(){
+        }
     }
 }
