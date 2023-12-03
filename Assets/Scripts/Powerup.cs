@@ -12,14 +12,14 @@ public class Powerup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    void OnTriggerEnter (Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Player player = other.GetComponent<Player>();
+            MainPlayer player = other.GetComponent<MainPlayer>();
             player.increaseArmySize();
             Destroy(gameObject);
         }
