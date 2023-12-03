@@ -23,4 +23,5 @@ public class PlayerSoldier : MonoBehaviour
     {
         agent.SetDestination(playerArmy.transform.position);
     }
+
 }

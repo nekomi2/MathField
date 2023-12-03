@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MainPlayer : MonoBehaviour
 {
-    public float speed = 10.0f; 
-    public float rotationSpeed = 100.0f; 
+    public float speed = 10.0f;
+    public float rotationSpeed = 100.0f;
     public int armySize = 1; // New variable for army size
     public PlayerArmy playerArmy; // Reference to PlayerArmy
 
@@ -57,14 +57,23 @@ public class MainPlayer : MonoBehaviour
         anim.SetBool("isRunningForward", moveVertical > 0 && Input.GetKey(KeyCode.LeftShift));
     }
 
-    public void increaseArmySize()
+    public void increaseArmySize(int newArmySize)
     {
-        armySize++;
-        playerArmy.spawnSoldier();
+        if (newArmySize - armySize <= 0)
+        {
+            return;
+        }
+
+        int increase = newArmySize - armySize;
+        for (int i = 0; i < increase; i++)
+        {
+            playerArmy.spawnSoldier();
+        }
     }
 
-    public void ChangeArmySize()
+    public void reduceArmySize()
     {
-        // Implementation for changing army size, if needed
+        Debug.Log("army size reduced: " + --armySize);
     }
+
 }
