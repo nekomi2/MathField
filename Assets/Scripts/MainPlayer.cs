@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class MainPlayer : MonoBehaviour
 {
-    public float speed = 5.0f;
-    public float rotationSpeed = 100.0f;
+    public float speed = 10.0f; 
+    public float rotationSpeed = 100.0f; 
+    public int armySize = 1; // New variable for army size
+    public PlayerArmy playerArmy; // Reference to PlayerArmy
+
     public new Camera camera;
-    public GameObject army;
     private CharacterController controller;
     private Animator anim;
 
@@ -44,9 +46,7 @@ public class MainPlayer : MonoBehaviour
             // Adjust the movement vector to be perpendicular to the terrain normal
             movement = Vector3.ProjectOnPlane(movement, hit.normal);
         }
-
         controller.Move(movement);
-
         if (moveHorizontal != 0)
         {
             transform.Rotate(0, moveHorizontal * rotationSpeed * Time.deltaTime, 0);
@@ -57,8 +57,14 @@ public class MainPlayer : MonoBehaviour
         anim.SetBool("isRunningForward", moveVertical > 0 && Input.GetKey(KeyCode.LeftShift));
     }
 
+    public void increaseArmySize()
+    {
+        armySize++;
+        playerArmy.spawnSoldier();
+    }
 
     public void ChangeArmySize()
     {
+        // Implementation for changing army size, if needed
     }
 }
