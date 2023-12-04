@@ -13,11 +13,15 @@ public class Enemy : MonoBehaviour
 
     public float sightRange;
     public bool playerInSightRange;
+    public float stopDistance = 5.0f;
+
+    private Animator anim;
 
     private void Awake()
     {
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("MaleCharacter").transform;
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -53,6 +57,41 @@ public class Enemy : MonoBehaviour
 
     private void ChasePlayer()
     {
-        agent.SetDestination(player.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        if (distanceToPlayer > stopDistance)
+        {
+            agent.SetDestination(player.position);
+            anim.SetBool("isRunningForward", true);
+            anim.SetBool("isWalkingForward", false);
+            anim.SetBool("isWalkingBackward", false);
+            anim.SetBool("isAttacking", false);
+        }
+        else
+        {
+            agent.ResetPath();
+            anim.SetBool("isRunningForward", false);
+            anim.SetBool("isWalkingForward", false);
+            anim.SetBool("isWalkingBackward", false);
+            anim.SetBool("isAttacking", true);
+        }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "MaleCharacter")
+        {
+            other.gameObject.GetComponent<Animator>().SetBool("isDefending", true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "MaleCharacter")
+        {
+            other.gameObject.GetComponent<Animator>().SetBool("isDefending", false);
+        }
+    }
+
+
 }

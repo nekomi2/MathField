@@ -16,14 +16,12 @@ public class MainPlayer : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = gameObject.GetComponentInChildren<Animator>();
 
-        // Initialize animator parameters
-        anim.SetBool("IsRunningForward", false);
+        anim.SetBool("isRunningForward", false);
         anim.SetBool("isWalkingForward", false);
         anim.SetBool("isWalkingBackward", false);
         anim.SetBool("isDead", false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
@@ -56,7 +54,7 @@ public class MainPlayer : MonoBehaviour
 
         anim.SetBool("isWalkingForward", moveVertical > 0);
         anim.SetBool("isWalkingBackward", moveVertical < 0);
-        anim.SetBool("IsRunningForward", moveVertical > 0 && Input.GetKey(KeyCode.LeftShift));
+        anim.SetBool("isRunningForward", moveVertical > 0 && Input.GetKey(KeyCode.LeftShift));
     }
 
 
