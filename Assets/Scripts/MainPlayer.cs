@@ -18,7 +18,7 @@ public class MainPlayer : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = gameObject.GetComponentInChildren<Animator>();
 
-        anim.SetBool("IsRunningForward", false);
+        anim.SetBool("isRunningForward", false);
         anim.SetBool("isWalkingForward", false);
         anim.SetBool("isWalkingBackward", false);
         anim.SetBool("isDead", false);
@@ -54,8 +54,7 @@ public class MainPlayer : MonoBehaviour
 
         anim.SetBool("isWalkingForward", moveVertical > 0);
         anim.SetBool("isWalkingBackward", moveVertical < 0);
-        anim.SetBool("IsRunningForward", moveVertical > 0 && Input.GetKey(KeyCode.LeftShift));
-        anim.SetBool("isWalkingBackward", moveVertical < 0);
+        anim.SetBool("isRunningForward", moveVertical > 0 && Input.GetKey(KeyCode.LeftShift));
     }
 
     public void increaseArmySize()
