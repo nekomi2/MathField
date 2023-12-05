@@ -9,6 +9,12 @@ public class MainPlayer : MonoBehaviour
     public int armySize = 1; // New variable for army size
     public PlayerArmy playerArmy; // Reference to PlayerArmy
 
+    public bool inCombat = false;
+
+    public float combatTime = 0.0f;
+
+    public float combatInterval = 0.2f;
+
     public new Camera camera;
     private CharacterController controller;
     private Animator anim;
@@ -26,6 +32,24 @@ public class MainPlayer : MonoBehaviour
 
     void Update()
     {
+        updateMovement();
+        if (inCombat)
+        {
+            if (Time.time - combatTime > combatInterval)
+            {
+                reduceArmySize();
+                combatTime = Time.time;
+            }
+            if (armySize <= 0)
+            {
+                anim.SetBool("isDead", true);
+                inCombat = false;
+            }
+        }
+    }
+
+    private void updateMovement()
+    {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
@@ -39,11 +63,9 @@ public class MainPlayer : MonoBehaviour
 
         Vector3 movement = forward * moveVertical * speed * Time.deltaTime;
 
-        // Use a raycast to find the normal of the terrain
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -Vector3.up, out hit))
         {
-            // Adjust the movement vector to be perpendicular to the terrain normal
             movement = Vector3.ProjectOnPlane(movement, hit.normal);
         }
         controller.Move(movement);
@@ -56,7 +78,6 @@ public class MainPlayer : MonoBehaviour
         anim.SetBool("isWalkingBackward", moveVertical < 0);
         anim.SetBool("isRunningForward", moveVertical > 0 && Input.GetKey(KeyCode.LeftShift));
     }
-
     public void increaseArmySize(int newArmySize)
     {
         if (newArmySize - armySize <= 0)
@@ -69,11 +90,34 @@ public class MainPlayer : MonoBehaviour
         {
             playerArmy.spawnSoldier();
         }
+        armySize = newArmySize;
     }
 
     public void reduceArmySize()
     {
+        if (armySize <= 0)
+        {
+            return;
+        }
         Debug.Log("army size reduced: " + --armySize);
+        playerArmy.killSoldier();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            inCombat = true;
+            combatTime = Time.time;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            inCombat = false;
+        }
     }
 
 }

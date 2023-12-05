@@ -26,4 +26,11 @@ public class PlayerArmy : MonoBehaviour
         newSoldier.transform.SetParent(this.transform);
         newSoldier.playerArmy = this;
     }
+
+    public void killSoldier()
+    {
+        PlayerSoldier soldier = this.GetComponentInChildren<PlayerSoldier>();
+        if (soldier != null)
+            Destroy(soldier.gameObject);
+    }
 }
