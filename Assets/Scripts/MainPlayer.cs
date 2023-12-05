@@ -13,6 +13,8 @@ public class MainPlayer : MonoBehaviour
 
     public float combatTime = 0.0f;
 
+    public float combatInterval = 0.2f;
+
     public new Camera camera;
     private CharacterController controller;
     private Animator anim;
@@ -33,10 +35,10 @@ public class MainPlayer : MonoBehaviour
         updateMovement();
         if (inCombat)
         {
-            if (Timer.time - combatTime > 0.5f)
+            if (Time.time - combatTime > combatInterval)
             {
                 reduceArmySize();
-                combatTime = Timer.time;
+                combatTime = Time.time;
             }
             if (armySize <= 0)
             {
@@ -88,11 +90,17 @@ public class MainPlayer : MonoBehaviour
         {
             playerArmy.spawnSoldier();
         }
+        armySize = newArmySize;
     }
 
     public void reduceArmySize()
     {
+        if (armySize <= 0)
+        {
+            return;
+        }
         Debug.Log("army size reduced: " + --armySize);
+        playerArmy.killSoldier();
     }
 
     void OnTriggerEnter(Collider other)
@@ -100,7 +108,7 @@ public class MainPlayer : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             inCombat = true;
-            combatTime = Timer.time;
+            combatTime = Time.time;
         }
     }
 
