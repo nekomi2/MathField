@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public enum CustomSlimeAnimationState
 {
-    Idle, Walk, Jump, Attack, Damage 
+    Idle, Walk, Jump, Attack, Damage
 }
 
 public class playerSlime : MonoBehaviour
@@ -23,7 +23,7 @@ public class playerSlime : MonoBehaviour
     void Start()
     {
         faceMaterial = SmileBody.GetComponent<Renderer>().materials[1];
-        Debug.Log(faceMaterial.ToString());
+        // Debug.Log(faceMaterial.ToString());
         SetFace(faces.Idleface);
         currentState = CustomSlimeAnimationState.Idle;
 
@@ -111,11 +111,12 @@ public class playerSlime : MonoBehaviour
             currentState = CustomSlimeAnimationState.Jump;
             // Debug.Log("Pressed space");
         }
-        if(!Input.anyKey){
+        if (!Input.anyKey)
+        {
             currentState = CustomSlimeAnimationState.Idle;
             animator.SetFloat("Speed", 0.0f);
         }
-        if (inCombat) 
+        if (inCombat)
         {
             currentState = CustomSlimeAnimationState.Attack;
         }
