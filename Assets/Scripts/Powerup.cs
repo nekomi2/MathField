@@ -96,7 +96,6 @@ public class Powerup : MonoBehaviour
 
     private int calculateNewArmySize(int armySize)
     {
-        Debug.Log("Calculating new army size");
         int newArmySize = 0;
         switch (operation)
         {
