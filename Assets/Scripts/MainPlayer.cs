@@ -11,6 +11,8 @@ public class MainPlayer : MonoBehaviour
 
     public bool inCombat = false;
 
+    public bool isDead = false;
+
     public float combatTime = 0.0f;
 
     public float combatInterval = 0.2f;
@@ -32,6 +34,10 @@ public class MainPlayer : MonoBehaviour
 
     void Update()
     {
+        if (isDead)
+        {
+            return;
+        }
         updateMovement();
         if (inCombat)
         {
@@ -44,6 +50,7 @@ public class MainPlayer : MonoBehaviour
             {
                 anim.SetBool("isDead", true);
                 inCombat = false;
+                isDead = true;
             }
         }
     }
