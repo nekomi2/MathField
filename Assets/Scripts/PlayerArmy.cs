@@ -8,13 +8,13 @@ public class PlayerArmy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void spawnSoldier()
@@ -22,6 +22,8 @@ public class PlayerArmy : MonoBehaviour
         // Instantiate the soldier prefab
         //put it in random position around army
         Debug.Log("Spawning soldier");
-        Instantiate(playerSoldierPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        PlayerSoldier newSoldier = Instantiate(playerSoldierPrefab, this.transform.position - new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f)), Quaternion.identity);
+        newSoldier.transform.SetParent(this.transform);
+        newSoldier.playerArmy = this;
     }
 }

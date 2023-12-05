@@ -6,11 +6,11 @@ public class PlayerSoldier : MonoBehaviour
 {
     public UnityEngine.AI.NavMeshAgent agent;
     // public Transform player;
-    public Transform playerArmy;
+    public PlayerArmy playerArmy;
 
     private void Awake()
     {
-        playerArmy = GameObject.Find("Player Army").transform;
+        // Get the army which is the parent
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
@@ -21,6 +21,7 @@ public class PlayerSoldier : MonoBehaviour
 
     private void ChasePlayer()
     {
-        agent.SetDestination(playerArmy.position);
+        agent.SetDestination(playerArmy.transform.position);
     }
+
 }
