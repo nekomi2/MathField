@@ -21,6 +21,17 @@ public class Powerup : MonoBehaviour
     public int limit;
 
     private TMPro.TextMeshProUGUI[] texts;
+
+    void Awake()
+    {
+        //Put on surface normal
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit))
+        {
+            transform.position = hit.point;
+            transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+        }
+    }
     void Start()
     {
         texts = GetComponentsInChildren<TMPro.TextMeshProUGUI>(true);
@@ -43,10 +54,34 @@ public class Powerup : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void createAdditionPowerup(int operand, int limit)
     {
+        operation = Operation.Addition;
+        this.operand = operand;
+        this.limit = limit;
+    }
 
+    public void createMultiplicationPowerup(int operand, int limit)
+    {
+        operation = Operation.Multiplication;
+        this.operand = operand;
+        this.limit = limit;
+    }
+
+    public void createModulusAdditionPowerup(int operand, int modulus, int limit)
+    {
+        operation = Operation.ModulusAddition;
+        this.operand = operand;
+        this.modulus = modulus;
+        this.limit = limit;
+    }
+
+    public void createModulusMultiplicationPowerup(int operand, int modulus, int limit)
+    {
+        operation = Operation.ModulusMultiplication;
+        this.operand = operand;
+        this.modulus = modulus;
+        this.limit = limit;
     }
 
     void OnTriggerEnter(Collider other)
