@@ -27,6 +27,9 @@ public class MenuSoundBtnsScript : MonoBehaviour
 
     public static MenuSoundBtnsScript instance = null;
 
+    public GameObject player;
+    public GameObject enemy;
+
     private void Start()
     {
         themeSource = gameObject.AddComponent<AudioSource>();
@@ -60,6 +63,31 @@ public class MenuSoundBtnsScript : MonoBehaviour
         {
             Destroy(base.gameObject);
         }
+    }
+
+    private void Update()
+    {
+        player = GameObject.Find("PlayerCharacter");
+        enemy = GameObject.Find("EnemyCharacter");
+
+        if (player != null && enemy != null)
+        {
+            bool inCombat = enemy.GetComponent<Enemy>().GetInCombat();
+            if (inCombat)
+            {
+                playCombatSound();
+            }
+
+            if (player.GetComponent<MainPlayer>().isDead)
+            {
+                playLose();
+            }
+
+            if(enemy.GetComponent<Enemy>().isDead) {
+                playWin();
+            }
+        }
+
     }
 
 
