@@ -15,8 +15,8 @@ public class enemySlime : MonoBehaviour
     public GameObject SmileBody;
     internal enemySlimeAnimationState enemyCurrentState; //set this according to main enemy's current animation state
 
-    internal bool inCombat;
-    internal bool dead; //flag to determine when this game object is destroyed
+    bool inCombat;
+    bool dead; //flag to determine when this game object is destroyed
     private Material faceMaterial;
     public Animator animator;
 
@@ -24,9 +24,8 @@ public class enemySlime : MonoBehaviour
     void Start()
     {
         faceMaterial = SmileBody.GetComponent<Renderer>().materials[1];
-        Debug.Log(faceMaterial.ToString());
-        SetFace(faces.Idleface);
-        enemyCurrentState = enemySlimeAnimationState.Idle;
+        SetFace(faces.WalkFace);
+        enemyCurrentState = enemySlimeAnimationState.Walk;
 
     }
 
@@ -38,13 +37,15 @@ public class enemySlime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //add line to set inCombat using Enemy.cs script
+
         switch (enemyCurrentState)
         {
-            case enemySlimeAnimationState.Idle:
+            /* case enemySlimeAnimationState.Idle:
 
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) return;
                 SetFace(faces.Idleface);
-                break;
+                break; */
 
             case enemySlimeAnimationState.Walk:
 
@@ -53,7 +54,7 @@ public class enemySlime : MonoBehaviour
                 break;
 
 
-            case enemySlimeAnimationState.Jump:
+            /* case enemySlimeAnimationState.Jump:
 
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")) return;
 
@@ -61,7 +62,7 @@ public class enemySlime : MonoBehaviour
                 animator.SetTrigger("Jump");
 
                 //Debug.Log("Jumping");
-                break;
+                break; */
 
             case enemySlimeAnimationState.Attack:
 
@@ -72,6 +73,7 @@ public class enemySlime : MonoBehaviour
                 // Debug.Log("Attacking");
 
                 break;
+
             case enemySlimeAnimationState.Damage:
 
                 // Do nothing when animtion is playing
@@ -88,6 +90,15 @@ public class enemySlime : MonoBehaviour
 
         }
 
+        if (inCombat)
+        {
+            enemyCurrentState = enemySlimeAnimationState.Attack;
+        }
+        if (dead)
+        {
+            enemyCurrentState = enemySlimeAnimationState.Damage;
+        }
+
 
     }
 
@@ -96,19 +107,19 @@ public class enemySlime : MonoBehaviour
 
         if (message.Equals("AnimationDamageEnded"))
         {
-            Debug.Log("DamageAnimationEnded");
+            //Debug.Log("DamageAnimationEnded");
             Destroy(gameObject);
 
         }
 
         if (message.Equals("AnimationAttackEnded"))
         {
-            enemyCurrentState = enemySlimeAnimationState.Idle;
+            enemyCurrentState = enemySlimeAnimationState.Walk;
         }
 
-        if (message.Equals("AnimationJumpEnded"))
+        /* if (message.Equals("AnimationJumpEnded"))
         {
-            enemyCurrentState = enemySlimeAnimationState.Idle;
-        }
+            enemyCurrentState = enemySlimeAnimationState.Walk;
+        } */
     }
 }
