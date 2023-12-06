@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static EnemyAi;
 
-public enum CustomSlimeAnimationState
+public enum enemySlimeAnimationState
 {
-    Idle, Walk, Jump, Attack, Damage 
+    Idle, Walk, Jump, Attack, Damage
 }
 
-public class playerSlime : MonoBehaviour
+public class enemySlime : MonoBehaviour
 {
     public Face faces;
     public GameObject SmileBody;
-    public CustomSlimeAnimationState currentState;
+    internal enemySlimeAnimationState enemyCurrentState; //set this according to main enemy's current animation state
 
-    internal bool inCombat;
-    internal bool dead; //flag to determine when this game object is destroyed
+    bool inCombat;
+    bool dead; //flag to determine when this game object is destroyed
     private Material faceMaterial;
     public Animator animator;
 
@@ -23,9 +24,8 @@ public class playerSlime : MonoBehaviour
     void Start()
     {
         faceMaterial = SmileBody.GetComponent<Renderer>().materials[1];
-        Debug.Log(faceMaterial.ToString());
-        SetFace(faces.Idleface);
-        currentState = CustomSlimeAnimationState.Idle;
+        SetFace(faces.WalkFace);
+        enemyCurrentState = enemySlimeAnimationState.Walk;
 
     }
 
@@ -37,22 +37,24 @@ public class playerSlime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (currentState)
+        //add line to set inCombat using Enemy.cs script
+
+        switch (enemyCurrentState)
         {
-            case CustomSlimeAnimationState.Idle:
+            /* case enemySlimeAnimationState.Idle:
 
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) return;
                 SetFace(faces.Idleface);
-                break;
+                break; */
 
-            case CustomSlimeAnimationState.Walk:
+            case enemySlimeAnimationState.Walk:
 
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Walk")) return;
                 SetFace(faces.WalkFace);
                 break;
 
 
-            case CustomSlimeAnimationState.Jump:
+            /* case enemySlimeAnimationState.Jump:
 
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")) return;
 
@@ -60,9 +62,9 @@ public class playerSlime : MonoBehaviour
                 animator.SetTrigger("Jump");
 
                 //Debug.Log("Jumping");
-                break;
+                break; */
 
-            case CustomSlimeAnimationState.Attack:
+            case enemySlimeAnimationState.Attack:
 
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return;
                 SetFace(faces.attackFace);
@@ -71,7 +73,8 @@ public class playerSlime : MonoBehaviour
                 // Debug.Log("Attacking");
 
                 break;
-            case CustomSlimeAnimationState.Damage:
+
+            case enemySlimeAnimationState.Damage:
 
                 // Do nothing when animtion is playing
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Damage0")
@@ -87,63 +90,36 @@ public class playerSlime : MonoBehaviour
 
         }
 
-        if (Input.GetKey(KeyCode.W))
+        if (inCombat)
         {
-            animator.SetFloat("Speed", 1.0f);
-            currentState = CustomSlimeAnimationState.Walk;
-            // Debug.Log("Pressed w");
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            animator.SetFloat("Speed", 1.0f);
-            currentState = CustomSlimeAnimationState.Walk;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(0.0f, -0.5f, 0.0f);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(0.0f, 0.5f, 0.0f);
-        }
-        if (Input.GetKey(KeyCode.Space))
-        {
-            currentState = CustomSlimeAnimationState.Jump;
-            // Debug.Log("Pressed space");
-        }
-        if(!Input.anyKey){
-            currentState = CustomSlimeAnimationState.Idle;
-            animator.SetFloat("Speed", 0.0f);
-        }
-        if (inCombat) 
-        {
-            currentState = CustomSlimeAnimationState.Attack;
+            enemyCurrentState = enemySlimeAnimationState.Attack;
         }
         if (dead)
         {
-            currentState = CustomSlimeAnimationState.Damage;
+            enemyCurrentState = enemySlimeAnimationState.Damage;
         }
+
+
     }
 
-    // Animation Event
     public void AlertObservers(string message)
     {
 
         if (message.Equals("AnimationDamageEnded"))
         {
-            Debug.Log("DamageAnimationEnded");
+            //Debug.Log("DamageAnimationEnded");
             Destroy(gameObject);
 
         }
 
         if (message.Equals("AnimationAttackEnded"))
         {
-            currentState = CustomSlimeAnimationState.Idle;
+            enemyCurrentState = enemySlimeAnimationState.Walk;
         }
 
-        if (message.Equals("AnimationJumpEnded"))
+        /* if (message.Equals("AnimationJumpEnded"))
         {
-            currentState = CustomSlimeAnimationState.Idle;
-        }
+            enemyCurrentState = enemySlimeAnimationState.Walk;
+        } */
     }
 }
