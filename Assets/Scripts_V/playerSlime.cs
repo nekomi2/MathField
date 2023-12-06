@@ -14,8 +14,8 @@ public class playerSlime : MonoBehaviour
     public GameObject SmileBody;
     public CustomSlimeAnimationState currentState;
 
-    internal bool inCombat;
-    internal bool dead; //flag to determine when this game object is destroyed
+    bool inCombat;
+    bool dead; //flag to determine when this game object is destroyed
     private Material faceMaterial;
     public Animator animator;
 
@@ -23,7 +23,6 @@ public class playerSlime : MonoBehaviour
     void Start()
     {
         faceMaterial = SmileBody.GetComponent<Renderer>().materials[1];
-        // Debug.Log(faceMaterial.ToString());
         SetFace(faces.Idleface);
         currentState = CustomSlimeAnimationState.Idle;
 
@@ -37,6 +36,9 @@ public class playerSlime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //add line to set inCombat using Enemy.cs script
+
         switch (currentState)
         {
             case CustomSlimeAnimationState.Idle:
@@ -52,15 +54,15 @@ public class playerSlime : MonoBehaviour
                 break;
 
 
-            case CustomSlimeAnimationState.Jump:
+            // case CustomSlimeAnimationState.Jump:
 
-                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")) return;
+                // if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")) return;
 
-                SetFace(faces.jumpFace);
-                animator.SetTrigger("Jump");
+                // SetFace(faces.jumpFace);
+                // animator.SetTrigger("Jump");
 
                 //Debug.Log("Jumping");
-                break;
+                // break;
 
             case CustomSlimeAnimationState.Attack:
 
@@ -98,21 +100,20 @@ public class playerSlime : MonoBehaviour
             animator.SetFloat("Speed", 1.0f);
             currentState = CustomSlimeAnimationState.Walk;
         }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(0.0f, -0.5f, 0.0f);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(0.0f, 0.5f, 0.0f);
-        }
-        if (Input.GetKey(KeyCode.Space))
-        {
-            currentState = CustomSlimeAnimationState.Jump;
+        // if (Input.GetKey(KeyCode.D))
+        // {
+            // transform.Rotate(0.0f, -0.5f, 0.0f);
+        // }
+        // if (Input.GetKey(KeyCode.A))
+        // {
+            // transform.Rotate(0.0f, 0.5f, 0.0f);
+        // }
+        // if (Input.GetKey(KeyCode.Space))
+        // {
+            // currentState = CustomSlimeAnimationState.Jump;
             // Debug.Log("Pressed space");
-        }
-        if (!Input.anyKey)
-        {
+        // }
+        if(!Input.anyKey){
             currentState = CustomSlimeAnimationState.Idle;
             animator.SetFloat("Speed", 0.0f);
         }
@@ -132,7 +133,7 @@ public class playerSlime : MonoBehaviour
 
         if (message.Equals("AnimationDamageEnded"))
         {
-            Debug.Log("DamageAnimationEnded");
+            //Debug.Log("DamageAnimationEnded");
             Destroy(gameObject);
 
         }

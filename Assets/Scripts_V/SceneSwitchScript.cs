@@ -11,7 +11,7 @@ public class SceneSwitchScript : MonoBehaviour
     }
 
     public void switchToGame(){
-        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Single); //Change this if you're not naming the main game scene "GameScene"
     }
 
     
