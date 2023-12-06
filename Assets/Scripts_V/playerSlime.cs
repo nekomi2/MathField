@@ -18,6 +18,7 @@ public class playerSlime : MonoBehaviour
     bool dead; //flag to determine when this game object is destroyed
     private Material faceMaterial;
     public Animator animator;
+    public GameObject enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class playerSlime : MonoBehaviour
         faceMaterial = SmileBody.GetComponent<Renderer>().materials[1];
         SetFace(faces.Idleface);
         currentState = CustomSlimeAnimationState.Idle;
+        enemy = GameObject.Find("EnemyCharacter");
 
     }
 
@@ -37,7 +39,7 @@ public class playerSlime : MonoBehaviour
     void Update()
     {
 
-        //add line to set inCombat using Enemy.cs script
+        inCombat = enemy.GetComponent<Enemy>().GetInCombat();
 
         switch (currentState)
         {
@@ -54,15 +56,15 @@ public class playerSlime : MonoBehaviour
                 break;
 
 
-            // case CustomSlimeAnimationState.Jump:
+            case CustomSlimeAnimationState.Jump:
 
-                // if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")) return;
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")) return;
 
-                // SetFace(faces.jumpFace);
-                // animator.SetTrigger("Jump");
+                SetFace(faces.jumpFace);
+                animator.SetTrigger("Jump");
 
-                //Debug.Log("Jumping");
-                // break;
+                // Debug.Log("Jumping");
+                break;
 
             case CustomSlimeAnimationState.Attack:
 
@@ -108,12 +110,13 @@ public class playerSlime : MonoBehaviour
         // {
             // transform.Rotate(0.0f, 0.5f, 0.0f);
         // }
-        // if (Input.GetKey(KeyCode.Space))
-        // {
-            // currentState = CustomSlimeAnimationState.Jump;
+        if (enemy.GetComponent<Enemy>().isDead)
+        {
+            currentState = CustomSlimeAnimationState.Jump;
             // Debug.Log("Pressed space");
-        // }
-        if(!Input.anyKey){
+        }
+        if(!Input.anyKey && !enemy.GetComponent<Enemy>().isDead)
+        {
             currentState = CustomSlimeAnimationState.Idle;
             animator.SetFloat("Speed", 0.0f);
         }
@@ -138,14 +141,14 @@ public class playerSlime : MonoBehaviour
 
         }
 
-        if (message.Equals("AnimationAttackEnded"))
+        /* if (message.Equals("AnimationAttackEnded"))
         {
             currentState = CustomSlimeAnimationState.Idle;
-        }
+        } */
 
-        if (message.Equals("AnimationJumpEnded"))
+        /* if (message.Equals("AnimationJumpEnded"))
         {
             currentState = CustomSlimeAnimationState.Idle;
-        }
+        } */ 
     }
 }

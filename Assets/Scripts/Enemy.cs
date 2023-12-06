@@ -217,4 +217,9 @@ public class Enemy : MonoBehaviour
         Debug.Log("army size reduced: " + --armySize);
         enemyArmy.killSoldier();
     }
+
+    public bool GetInCombat()
+    {
+        return inCombat;
+    }
 }

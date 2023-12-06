@@ -13,12 +13,14 @@ public class enemySlime : MonoBehaviour
 {
     public Face faces;
     public GameObject SmileBody;
-    internal enemySlimeAnimationState enemyCurrentState; //set this according to main enemy's current animation state
+    public enemySlimeAnimationState enemyCurrentState; 
 
     bool inCombat;
     bool dead; //flag to determine when this game object is destroyed
     private Material faceMaterial;
     public Animator animator;
+    public GameObject enemy;
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,8 @@ public class enemySlime : MonoBehaviour
         faceMaterial = SmileBody.GetComponent<Renderer>().materials[1];
         SetFace(faces.WalkFace);
         enemyCurrentState = enemySlimeAnimationState.Walk;
+        enemy = GameObject.Find("EnemyCharacter");
+        player = GameObject.Find("PlayerCharacter");
 
     }
 
@@ -37,7 +41,7 @@ public class enemySlime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //add line to set inCombat using Enemy.cs script
+        inCombat = enemy.GetComponent<Enemy>().GetInCombat();
 
         switch (enemyCurrentState)
         {
@@ -54,7 +58,7 @@ public class enemySlime : MonoBehaviour
                 break;
 
 
-            /* case enemySlimeAnimationState.Jump:
+            case enemySlimeAnimationState.Jump:
 
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")) return;
 
@@ -62,7 +66,7 @@ public class enemySlime : MonoBehaviour
                 animator.SetTrigger("Jump");
 
                 //Debug.Log("Jumping");
-                break; */
+                break; 
 
             case enemySlimeAnimationState.Attack:
 
@@ -89,6 +93,10 @@ public class enemySlime : MonoBehaviour
                 break;
 
         }
+        if (player.GetComponent<MainPlayer>().isDead)
+        {
+            enemyCurrentState = enemySlimeAnimationState.Jump;
+        }
 
         if (inCombat)
         {
@@ -97,6 +105,10 @@ public class enemySlime : MonoBehaviour
         if (dead)
         {
             enemyCurrentState = enemySlimeAnimationState.Damage;
+        }
+        else
+        {
+            enemyCurrentState = enemySlimeAnimationState.Walk;
         }
 
 
@@ -112,10 +124,10 @@ public class enemySlime : MonoBehaviour
 
         }
 
-        if (message.Equals("AnimationAttackEnded"))
+        /* if (message.Equals("AnimationAttackEnded"))
         {
             enemyCurrentState = enemySlimeAnimationState.Walk;
-        }
+        } */
 
         /* if (message.Equals("AnimationJumpEnded"))
         {
