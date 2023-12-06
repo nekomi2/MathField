@@ -20,7 +20,7 @@ public class MainPlayer : MonoBehaviour
     public new Camera camera;
     private CharacterController controller;
     private Animator anim;
-
+    public Enemy EnemyCharacter;
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -34,8 +34,13 @@ public class MainPlayer : MonoBehaviour
 
     void Update()
     {
-        if (isDead)
+        if (isDead || EnemyCharacter.isDead)
         {
+            anim.SetBool("isWalkingForward", false);
+            anim.SetBool("isAttacking", false);
+            if(!isDead){
+                anim.SetBool("isWinning", true);
+            }
             return;
         }
         updateMovement();

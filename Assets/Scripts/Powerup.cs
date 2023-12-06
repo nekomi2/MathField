@@ -86,10 +86,18 @@ public class Powerup : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.gameObject.name == "PlayerCharacter")
         {
             MainPlayer player = other.GetComponent<MainPlayer>();
             player.increaseArmySize(calculateNewArmySize(player.armySize));
+            Destroy(gameObject);
+        }
+        if (other.CompareTag("Enemy") && other.gameObject.name == "EnemyCharacter")
+        {
+        Debug.Log("enter");
+
+            Enemy enemy = other.GetComponent<Enemy>();
+            enemy.increaseArmySize(calculateNewArmySize(enemy.armySize));
             Destroy(gameObject);
         }
     }
