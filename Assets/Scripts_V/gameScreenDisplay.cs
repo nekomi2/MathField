@@ -18,14 +18,15 @@ public class gameScreenDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        playerObj = GameObject.Find("PlayerCharacter");
+        opponentObj = GameObject.Find("EnemyCharacter");
     }
 
     // Update is called once per frame
     void Update()
     {
         armyCount.SetText("Your army count: " + playerObj.GetComponent<MainPlayer>().armySize);
-        opponentCount.SetText("Opponent army count: " + opponentObj.GetComponent<Enemy>()); //currently enemy.cs does not track army size 
+        opponentCount.SetText("Opponent army count: " + opponentObj.GetComponent<Enemy>().armySize); 
 
         if (shrink && shrinkIntervals > 0)
         {
