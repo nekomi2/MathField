@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     public float combatInterval = 0.2f;
     public bool isDead = false;
 
-    public float speed = 12.0f; //Slightly faster than player
+    public float speed = 11.0f; //Slightly faster than player
 
     private void Awake()
     {
