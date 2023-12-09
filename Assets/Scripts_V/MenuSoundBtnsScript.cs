@@ -29,6 +29,11 @@ public class MenuSoundBtnsScript : MonoBehaviour
 
     public GameObject player;
     public GameObject enemy;
+    public GameObject gameUI;
+
+    public bool lost = false;
+    public bool won = false;
+    public bool gameEnd = false;
 
     private void Start()
     {
@@ -69,23 +74,62 @@ public class MenuSoundBtnsScript : MonoBehaviour
     {
         player = GameObject.Find("PlayerCharacter");
         enemy = GameObject.Find("EnemyCharacter");
-
-        if (player != null && enemy != null)
+        gameUI = GameObject.Find("GameSceneUI");
+        bool inCombat = false;
+        if (player != null && enemy != null && !gameEnd)
         {
-            bool inCombat = enemy.GetComponent<Enemy>().GetInCombat();
+            inCombat = enemy.GetComponent<Enemy>().GetInCombat();
             if (inCombat)
             {
                 playCombatSound();
             }
 
-            if (player.GetComponent<MainPlayer>().isDead)
+            if (!lost && player.GetComponent<MainPlayer>().isDead)
             {
                 playLose();
+                lost = true;
+                inCombat = false;
+                gameEnd = true;
             }
 
-            if(enemy.GetComponent<Enemy>().isDead) {
+            if(!won && enemy.GetComponent<Enemy>().isDead) {
                 playWin();
+                won = true;
+                inCombat = false;
+                gameEnd=true;
             }
+        }
+        if(gameUI != null && !gameEnd)
+        {
+            if(gameUI.GetComponent<gameScreenDisplay>().shrinkIntervals <= 0)
+            {
+                Debug.Log("Time ran out");
+                if (player.GetComponent<MainPlayer>().armySize >= enemy.GetComponent<Enemy>().armySize)
+                {
+
+                    if (winSource.isPlaying)
+                    {
+                        return;
+                    }
+                    playWin();
+                    won = true;
+                    inCombat = false;
+                    gameEnd = true;
+                }
+                else
+                {
+                    if (loseSource.isPlaying) { return; }
+                    playLose();
+                    lost = true;
+                    inCombat = false;
+                    gameEnd = true;
+                }
+            }
+        }
+        if (gameEnd)
+        {
+            GameObject endGameCanvas = GameObject.Find("EndGameCanvas");
+            endGameCanvas.GetComponent<Canvas>().enabled = true;
         }
 
     }
@@ -106,6 +150,10 @@ public class MenuSoundBtnsScript : MonoBehaviour
 
     public void playCombatSound()
     {
+        if (combatSource.isPlaying)
+        {
+            return;
+        }
         combatSource.PlayOneShot(combatClip);
     }
 

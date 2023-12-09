@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000004, guid: 379a97b8b0fe79149ad46ae0a0d92603, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -526,7 +526,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 3e-44, z: 2.875e-42, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -1449,6 +1449,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5e7f573f3709fb341b4be806bbf09e51, type: 3}
   - {fileID: 21300000, guid: d75b0da6b364abc4da3ed950a85d87ad, type: 3}
   targetButton: {fileID: 1180938761}
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  lost: 0
+  won: 0
 --- !u!1 &2002516303
 GameObject:
   m_ObjectHideFlags: 0
