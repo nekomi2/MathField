@@ -22,10 +22,13 @@ public class Enemy : MonoBehaviour
     public float combatInterval = 0.2f;
     public bool isDead = false;
 
+    public float speed = 11.0f; //Slightly faster than player
+
     private void Awake()
     {
         player = GameObject.Find("PlayerCharacter").transform;
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = speed;
         anim = GetComponent<Animator>();
     }
 
@@ -42,7 +45,8 @@ public class Enemy : MonoBehaviour
         {
             anim.SetBool("isWalkingForward", false);
             anim.SetBool("isAttacking", false);
-            if(!isDead){
+            if (!isDead)
+            {
                 anim.SetBool("isWinning", true);
             }
             agent.velocity = Vector3.zero;
