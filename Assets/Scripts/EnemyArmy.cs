@@ -24,6 +24,7 @@ public class EnemyArmy : MonoBehaviour
         Debug.Log("Spawning soldier");
         EnemySoldier newSoldier = Instantiate(enemySoldierPrefab, this.transform.position - new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f)), Quaternion.identity);
         newSoldier.transform.SetParent(this.transform);
+        newSoldier.gameObject.SetActive(true);
         newSoldier.enemyArmy = this;
     }
     public void killSoldier()
