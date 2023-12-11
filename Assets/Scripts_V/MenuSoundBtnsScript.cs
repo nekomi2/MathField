@@ -35,6 +35,8 @@ public class MenuSoundBtnsScript : MonoBehaviour
     public bool won = false;
     public bool gameEnd = false;
 
+    public GameObject endGameCanvas;
+
     private void Start()
     {
         themeSource = gameObject.AddComponent<AudioSource>();
@@ -55,11 +57,31 @@ public class MenuSoundBtnsScript : MonoBehaviour
         loseSource = gameObject.AddComponent<AudioSource>();
         loseClip = Resources.Load<AudioClip>("lose");
 
+        if (!gameEnd)
+        {
+            endGameCanvas = GameObject.Find("EndGameCanvas");
+
+            if (endGameCanvas != null)
+            {
+                endGameCanvas.GetComponent<Canvas>().enabled = false;
+            }
+
+            lost = false;
+            won = false;
+            gameEnd = false;
+        }
+
     }
 
     private void Awake()
     {
-        if(instance == null)
+        endGameCanvas = GameObject.Find("EndGameCanvas");
+        if(endGameCanvas != null)
+        {
+            endGameCanvas.GetComponent<Canvas>().enabled = false;
+        }
+
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(instance);
@@ -75,7 +97,10 @@ public class MenuSoundBtnsScript : MonoBehaviour
         player = GameObject.Find("PlayerCharacter");
         enemy = GameObject.Find("EnemyCharacter");
         gameUI = GameObject.Find("GameSceneUI");
+        endGameCanvas = GameObject.Find("EndGameCanvas");
+
         bool inCombat = false;
+
         if (player != null && enemy != null && !gameEnd)
         {
             inCombat = enemy.GetComponent<Enemy>().GetInCombat();
@@ -101,7 +126,12 @@ public class MenuSoundBtnsScript : MonoBehaviour
         }
         if(gameUI != null && !gameEnd)
         {
-            if(gameUI.GetComponent<gameScreenDisplay>().shrinkIntervals <= 0)
+            endGameCanvas.GetComponent<Canvas>().enabled = false;
+            lost = false;
+            won = false;
+            gameEnd = false;
+
+            if (gameUI.GetComponent<gameScreenDisplay>().shrinkIntervals <= 0)
             {
                 Debug.Log("Time ran out");
                 if (player.GetComponent<MainPlayer>().armySize >= enemy.GetComponent<Enemy>().armySize)
@@ -128,8 +158,15 @@ public class MenuSoundBtnsScript : MonoBehaviour
         }
         if (gameEnd)
         {
-            GameObject endGameCanvas = GameObject.Find("EndGameCanvas");
-            endGameCanvas.GetComponent<Canvas>().enabled = true;
+
+
+            if(!winSource.isPlaying && !loseSource.isPlaying)
+            {
+                endGameCanvas = GameObject.Find("EndGameCanvas");
+                endGameCanvas.GetComponent<Canvas>().enabled = true;
+                Time.timeScale = 0;
+                themeSource.Play();
+            }
         }
 
     }

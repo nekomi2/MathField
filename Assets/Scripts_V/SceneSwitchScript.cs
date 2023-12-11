@@ -11,7 +11,8 @@ public class SceneSwitchScript : MonoBehaviour
     }
 
     public void switchToGame(){
-        SceneManager.LoadScene("Steve_env", LoadSceneMode.Single); //Change this if you're not naming the main game scene "GameScene"
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Level_1", LoadSceneMode.Single); //Change this if you're not naming the main game scene "GameScene"
     }
 
     

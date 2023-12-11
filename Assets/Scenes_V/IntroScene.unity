@@ -1451,8 +1451,10 @@ MonoBehaviour:
   targetButton: {fileID: 1180938761}
   player: {fileID: 0}
   enemy: {fileID: 0}
+  gameUI: {fileID: 0}
   lost: 0
   won: 0
+  gameEnd: 0
 --- !u!1 &2002516303
 GameObject:
   m_ObjectHideFlags: 0
