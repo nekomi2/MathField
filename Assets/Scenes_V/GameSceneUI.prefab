@@ -473,7 +473,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Time until arena shrinks: '
+  m_text: 'Time until game over: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7dae4d62601c29b4795ae28561abc503, type: 2}
   m_sharedMaterial: {fileID: 6862089196463006733, guid: 7dae4d62601c29b4795ae28561abc503, type: 2}
