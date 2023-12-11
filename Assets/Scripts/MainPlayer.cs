@@ -38,7 +38,8 @@ public class MainPlayer : MonoBehaviour
         {
             anim.SetBool("isWalkingForward", false);
             anim.SetBool("isAttacking", false);
-            if(!isDead){
+            if (!isDead)
+            {
                 anim.SetBool("isWinning", true);
             }
             return;
@@ -121,6 +122,10 @@ public class MainPlayer : MonoBehaviour
         {
             inCombat = true;
             combatTime = Time.time;
+        }
+        if (other.gameObject.CompareTag("Boss"))
+        {
+            isDead = true;
         }
     }
 
