@@ -6,8 +6,7 @@ using UnityEngine.AI;
 public class BossSlime : MonoBehaviour
 {
     public Powerup powerup;
-    public float detectionRadius = 100f;
-
+    public float detectionRadius = 50f;
     public float innerRadius = 10f;
     public float outerRadius = 50f;
     public float speed = 10f;
