@@ -41,7 +41,7 @@ public class enemySlime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        inCombat = enemy.GetComponent<Enemy>().GetInCombat();
+        inCombat = player.GetComponent<MainPlayer>().inCombat;
 
         switch (enemyCurrentState)
         {
@@ -124,14 +124,14 @@ public class enemySlime : MonoBehaviour
 
         }
 
-        /* if (message.Equals("AnimationAttackEnded"))
+        if (message.Equals("AnimationAttackEnded"))
         {
             enemyCurrentState = enemySlimeAnimationState.Walk;
-        } */
-
-        /* if (message.Equals("AnimationJumpEnded"))
+        }
+        
+        if (message.Equals("AnimationJumpEnded"))
         {
             enemyCurrentState = enemySlimeAnimationState.Walk;
-        } */
+        }
     }
 }

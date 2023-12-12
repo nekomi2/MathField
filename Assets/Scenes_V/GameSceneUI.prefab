@@ -776,5 +776,5 @@ MonoBehaviour:
   playerObj: {fileID: 0}
   opponentObj: {fileID: 0}
   menuSoundControl: {fileID: 0}
-  shrinkIntervals: 120
+  shrinkIntervals: 60
   shrink: 1

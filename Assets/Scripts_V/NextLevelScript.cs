@@ -9,6 +9,7 @@ public class NextLevelScript : MonoBehaviour
 {
     public GameObject btnsDisplay;
     public GameObject endGameCanvas;
+    public bool clicked;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class NextLevelScript : MonoBehaviour
 
     public void nextLevel()
     {
-
+        clicked = true;
         if (SceneManager.GetActiveScene().name == "Level_1")
         {
             SceneManager.LoadScene("Level_2", LoadSceneMode.Single);
@@ -46,7 +47,8 @@ public class NextLevelScript : MonoBehaviour
 
     public void retryLevel()
     {
-
+        clicked = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+
     }
 }
