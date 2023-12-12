@@ -88,9 +88,13 @@ public class Powerup : MonoBehaviour
     {
         if (other.CompareTag("Player") && other.gameObject.name == "PlayerCharacter")
         {
+            Debug.Log("power up hit");
             MainPlayer player = other.GetComponent<MainPlayer>();
             player.increaseArmySize(calculateNewArmySize(player.armySize));
             Destroy(gameObject);
+            GameObject s = GameObject.Find("BtnsCanvas");
+            Debug.Log(s);
+            s.GetComponent<MenuSoundBtnsScript>().playPowerUp();
         }
         if (other.CompareTag("Enemy") && other.gameObject.name == "EnemyCharacter")
         {

@@ -161,7 +161,6 @@ GameObject:
   - component: {fileID: 2446337565605025694}
   - component: {fileID: 8741834355160001355}
   - component: {fileID: 1751230784540083118}
-  - component: {fileID: 3493718720254680989}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -255,25 +254,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3493718720254680989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799548409707458677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f204d4b9b13a084994ccb5211cfa540, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  armyCount: {fileID: 2452936701168446989}
-  opponentCount: {fileID: 5346997280399785998}
-  timer: {fileID: 1617205173160638432}
-  playerObj: {fileID: 0}
-  opponentObj: {fileID: 0}
-  shrinkIntervals: 50
-  shrink: 1
 --- !u!1 &3714708357632650985
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +733,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8425013922542115640}
+  - component: {fileID: 5446926241647239528}
   m_Layer: 0
   m_Name: GameSceneUI
   m_TagString: Untagged
@@ -777,3 +758,23 @@ Transform:
   - {fileID: 3520313606898608503}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5446926241647239528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8962329122655898286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f204d4b9b13a084994ccb5211cfa540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armyCount: {fileID: 2452936701168446989}
+  opponentCount: {fileID: 5346997280399785998}
+  timer: {fileID: 1617205173160638432}
+  playerObj: {fileID: 0}
+  opponentObj: {fileID: 0}
+  menuSoundControl: {fileID: 0}
+  shrinkIntervals: 60
+  shrink: 1

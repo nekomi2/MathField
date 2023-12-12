@@ -14,7 +14,7 @@ public class gameScreenDisplay : MonoBehaviour
     public GameObject opponentObj;
     public GameObject menuSoundControl;
 
-    public float shrinkIntervals;
+    public float shrinkIntervals = 60.0f;
     public bool shrink;
 
     // Start is called before the first frame update
@@ -23,6 +23,8 @@ public class gameScreenDisplay : MonoBehaviour
         playerObj = GameObject.Find("PlayerCharacter");
         opponentObj = GameObject.Find("EnemyCharacter");
         menuSoundControl = GameObject.Find("BtnsCanvas");
+
+        shrink = true;
     }
 
         // Update is called once per frame

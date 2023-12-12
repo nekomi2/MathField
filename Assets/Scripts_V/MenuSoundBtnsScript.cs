@@ -10,8 +10,8 @@ public class MenuSoundBtnsScript : MonoBehaviour
     [SerializeField] private Sprite[] buttonSprites;
     [SerializeField] private Image targetButton;
 
-    private AudioSource themeSource;
-    private AudioClip theme;
+    public AudioSource themeSource;
+    public AudioClip theme;
 
     private AudioSource combatSource;
     private AudioClip combatClip;
@@ -35,6 +35,8 @@ public class MenuSoundBtnsScript : MonoBehaviour
     public bool won = false;
     public bool gameEnd = false;
 
+    public GameObject endGameCanvas;
+
     private void Start()
     {
         themeSource = gameObject.AddComponent<AudioSource>();
@@ -55,11 +57,27 @@ public class MenuSoundBtnsScript : MonoBehaviour
         loseSource = gameObject.AddComponent<AudioSource>();
         loseClip = Resources.Load<AudioClip>("lose");
 
+        endGameCanvas = GameObject.Find("EndGameCanvas");
+
+        if (endGameCanvas != null)
+        {
+            endGameCanvas.GetComponent<Canvas>().enabled = false;
+        }
+
+        lost = false;
+        won = false;
+        gameEnd = false;
     }
 
     private void Awake()
     {
-        if(instance == null)
+        endGameCanvas = GameObject.Find("EndGameCanvas");
+        if(endGameCanvas != null)
+        {
+            endGameCanvas.GetComponent<Canvas>().enabled = false;
+        }
+
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(instance);
@@ -75,7 +93,14 @@ public class MenuSoundBtnsScript : MonoBehaviour
         player = GameObject.Find("PlayerCharacter");
         enemy = GameObject.Find("EnemyCharacter");
         gameUI = GameObject.Find("GameSceneUI");
+        endGameCanvas = GameObject.Find("EndGameCanvas");
+
+        Debug.Log("Game End: " + gameEnd);
+        Debug.Log("L: " + lost);
+        Debug.Log("W: " + won);
+
         bool inCombat = false;
+
         if (player != null && enemy != null && !gameEnd)
         {
             inCombat = enemy.GetComponent<Enemy>().GetInCombat();
@@ -101,7 +126,8 @@ public class MenuSoundBtnsScript : MonoBehaviour
         }
         if(gameUI != null && !gameEnd)
         {
-            if(gameUI.GetComponent<gameScreenDisplay>().shrinkIntervals <= 0)
+            endGameCanvas.GetComponent<Canvas>().enabled = false;
+            if (gameUI.GetComponent<gameScreenDisplay>().shrinkIntervals <= 0)
             {
                 Debug.Log("Time ran out");
                 if (player.GetComponent<MainPlayer>().armySize >= enemy.GetComponent<Enemy>().armySize)
@@ -128,12 +154,43 @@ public class MenuSoundBtnsScript : MonoBehaviour
         }
         if (gameEnd)
         {
-            GameObject endGameCanvas = GameObject.Find("EndGameCanvas");
-            endGameCanvas.GetComponent<Canvas>().enabled = true;
+            if(!winSource.isPlaying && !loseSource.isPlaying)
+            {
+                endGameCanvas = GameObject.Find("EndGameCanvas");
+                endGameCanvas.GetComponent<Canvas>().enabled = true;
+                Time.timeScale = 0;
+                restart();
+            }
         }
 
     }
 
+    public void restart()
+    {
+        if (endGameCanvas.GetComponent<Canvas>().GetComponent<NextLevelScript>().clicked)
+        {
+            if (endGameCanvas != null)
+            {
+                endGameCanvas.GetComponent<Canvas>().enabled = false;
+            }
+
+            lost = false;
+            won = false;
+            gameEnd = false;
+            themeSource.Play();
+            gameUI.GetComponent<gameScreenDisplay>().shrinkIntervals = 60.0f;
+            gameUI.GetComponent<gameScreenDisplay>().shrink = true;
+
+            Debug.Log("Game End: " + gameEnd);
+            Debug.Log("L: " + lost);
+            Debug.Log("W: " + won);
+            Time.timeScale = 1;
+        }
+        else
+        {
+            Debug.Log("user hasn't clicked");
+        }
+    }
 
 
     public void playPauseTheme(){
@@ -159,7 +216,7 @@ public class MenuSoundBtnsScript : MonoBehaviour
 
     public void playPowerUp()
     {
-
+        Debug.Log("Play powerup");
         powerUpSource.PlayOneShot(powerUpClip);
     }
 

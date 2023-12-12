@@ -264,7 +264,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1185513719015057024}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5077664417208880193}
+        m_TargetAssemblyTypeName: NextLevelScript, Assembly-CSharp
+        m_MethodName: nextLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3261749249889370146
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +531,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8016641354787359767}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5077664417208880193}
+        m_TargetAssemblyTypeName: NextLevelScript, Assembly-CSharp
+        m_MethodName: retryLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4674306368470886387
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +556,7 @@ GameObject:
   - component: {fileID: 4266350106040734843}
   - component: {fileID: 1872795243240472962}
   - component: {fileID: 8733475325377047320}
+  - component: {fileID: 5077664417208880193}
   m_Layer: 0
   m_Name: EndGameCanvas
   m_TagString: Untagged
@@ -566,7 +591,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4674306368470886387}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -622,6 +647,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5077664417208880193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674306368470886387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a675af5d1df064c9d8290fb202b8c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btnsDisplay: {fileID: 0}
+  clickedBtnEnd: 0
 --- !u!1 &7170985556828607752
 GameObject:
   m_ObjectHideFlags: 0
