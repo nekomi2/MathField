@@ -660,7 +660,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btnsDisplay: {fileID: 0}
-  clickedBtnEnd: 0
+  endGameCanvas: {fileID: 0}
+  clicked: 0
 --- !u!1 &7170985556828607752
 GameObject:
   m_ObjectHideFlags: 0

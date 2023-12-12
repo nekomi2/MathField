@@ -3414,10 +3414,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4266350106040734843, guid: 8aed70768afa659429131648db4ae67c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4674306368470886387, guid: 8aed70768afa659429131648db4ae67c, type: 3}
       propertyPath: m_Name
       value: EndGameCanvas
