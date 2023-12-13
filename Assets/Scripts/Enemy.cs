@@ -66,15 +66,11 @@ public class Enemy : MonoBehaviour
                 isDead = true;
             }
         }
-        if (armySize <= playerCharacter.armySize)
+        if (armySize <= playerCharacter.armySize || !playerInSightRange)
         {
             if (powerUps.Length > 0)
             {
                 collectPowerUps(powerUps);
-            }
-            else
-            {
-                Patroling();
             }
         }
 
@@ -95,70 +91,44 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private void Patroling()
+private void collectPowerUps(GameObject[] powerUps)
+{
+    GameObject closestPowerUp = null;
+    float closestDistance = Mathf.Infinity;
+
+    foreach (GameObject powerUp in powerUps)
     {
-        GameObject[] powerUps = GameObject.FindGameObjectsWithTag("PowerUp");
-        if (powerUps.Length == 0)
+        float distance = Vector3.Distance(transform.position, powerUp.transform.position);
+        if (distance < closestDistance)
         {
-            walkPointSet = false;
-        }
-
-        if (!walkPointSet) SearchWalkPoint();
-
-        if (walkPointSet)
-            agent.SetDestination(walkPoint);
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        if (distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
-    }
-
-
-    private void collectPowerUps(GameObject[] powerUps)
-    {
-
-        if (!walkPointSet) SearchWalkPoint();
-
-        if (walkPointSet)
-            agent.SetDestination(walkPoint);
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        if (distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
-
-        // Find the closest powerUp
-        GameObject closestPowerUp = powerUps[0];
-        float minDistance = Vector3.Distance(transform.position, closestPowerUp.transform.position);
-        foreach (GameObject powerUp in powerUps)
-        {
-            float distance = Vector3.Distance(transform.position, powerUp.transform.position);
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                closestPowerUp = powerUp;
-            }
-        }
-
-        // Check if the closest powerUp still exists
-        if (closestPowerUp != null)
-        {
-            // Set the walkPoint to the closest powerUp
-            walkPoint = closestPowerUp.transform.position;
-            walkPointSet = true;
+            closestDistance = distance;
+            closestPowerUp = powerUp;
         }
     }
-    private void SearchWalkPoint()
+
+    if (closestPowerUp != null)
     {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
+        Debug.Log(closestPowerUp.transform.position);
 
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        Rigidbody powerUpRigidbody = closestPowerUp.GetComponent<Rigidbody>();
 
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-            walkPointSet = true;
+        // Check if the power-up has a Rigidbody component and is moving
+        if (powerUpRigidbody != null && powerUpRigidbody.velocity.magnitude > 0)
+        {
+            float timeToReach = closestDistance / agent.speed;
+
+            Vector3 predictedPosition = closestPowerUp.transform.position + powerUpRigidbody.velocity * timeToReach;
+
+            agent.SetDestination(predictedPosition);
+        }
+        else
+        {
+            agent.SetDestination(closestPowerUp.transform.position);
+        }
     }
+}
+
+
 
     private void ChasePlayer()
     {
@@ -227,3 +197,4 @@ public class Enemy : MonoBehaviour
         return inCombat;
     }
 }
+
