@@ -14,7 +14,7 @@ public class gameScreenDisplay : MonoBehaviour
     public GameObject opponentObj;
     public GameObject menuSoundControl;
 
-    public float shrinkIntervals = 60.0f;
+    public float shrinkIntervals = 120.0f;
     public bool shrink;
 
     // Start is called before the first frame update

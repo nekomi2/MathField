@@ -6979,7 +6979,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5446926241647239528, guid: a609640435769004fa1bb4658f0ef81c, type: 3}
       propertyPath: shrinkIntervals
-      value: 60
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 8425013922542115640, guid: a609640435769004fa1bb4658f0ef81c, type: 3}
       propertyPath: m_LocalPosition.x
