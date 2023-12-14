@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 59573b088aaea0442bf29e0a0e9d1339, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -6977,9 +6977,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5446926241647239528, guid: a609640435769004fa1bb4658f0ef81c, type: 3}
-      propertyPath: shrinkIntervals
-      value: 120
+    - target: {fileID: 1875960757824434696, guid: a609640435769004fa1bb4658f0ef81c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -474
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875960757824434696, guid: a609640435769004fa1bb4658f0ef81c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 244
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110073854483048100, guid: a609640435769004fa1bb4658f0ef81c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110073854483048100, guid: a609640435769004fa1bb4658f0ef81c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -475
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110073854483048100, guid: a609640435769004fa1bb4658f0ef81c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529148696924292924, guid: a609640435769004fa1bb4658f0ef81c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529148696924292924, guid: a609640435769004fa1bb4658f0ef81c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 574
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529148696924292924, guid: a609640435769004fa1bb4658f0ef81c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798753533286018824, guid: a609640435769004fa1bb4658f0ef81c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798753533286018824, guid: a609640435769004fa1bb4658f0ef81c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 265
       objectReference: {fileID: 0}
     - target: {fileID: 8425013922542115640, guid: a609640435769004fa1bb4658f0ef81c, type: 3}
       propertyPath: m_LocalPosition.x

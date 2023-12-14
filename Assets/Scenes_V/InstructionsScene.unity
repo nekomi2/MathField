@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 59573b088aaea0442bf29e0a0e9d1339, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.42221254, g: 0.64316183, b: 0.793691, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -278,12 +278,14 @@ MonoBehaviour:
     D - Turn Right\n\nYou play as a general of an army and the goal is to grow your
     army of slimes and be the last army standing. Engage in combat with the opponent
     armies by coming into contact with them. The bigger army survives and wins! You
-    lose if your army is defeated by an opposing army. There is also a one minute
+    lose if your army is defeated by an opposing army. There is also a two minute
     time limit until the bigger army automatically wins.\n\nPick up math powerups
     across the map to increase the size of your army based on the powerup equation.
-    \n\nSymbols: \n+N -  current army is increased by N\nxN - current army size is
-    multiplied by that amount\n-N - N is subtracted from current army size\n/N -
-    current army size is divided by N\n%N - current army is mod by N"
+    There is also a large boss (bunny) protecting a +100 special powerup. Coming
+    in contact with the boss means you automatically lose. \n\nSymbols: \n+N -  current
+    army is increased by N\nxN - current army size is multiplied by that amount\n-N
+    - N is subtracted from current army size\n/N - current army size is divided by
+    N\n%N - current army is mod by N"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7dae4d62601c29b4795ae28561abc503, type: 2}
   m_sharedMaterial: {fileID: 6862089196463006733, guid: 7dae4d62601c29b4795ae28561abc503, type: 2}
