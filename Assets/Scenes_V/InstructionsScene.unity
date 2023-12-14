@@ -282,10 +282,11 @@ MonoBehaviour:
     time limit until the bigger army automatically wins. There are 4 levels in total.\n\nPick
     up math powerups across the map to increase the size of your army based on the
     powerup equation. There is also a large boss (bunny) protecting a +100 special
-    powerup. Coming in contact with the boss means you automatically lose. \n\nSymbols:
-    \n+N -  current army is increased by N\nxN - current army size is multiplied
-    by that amount\n-N - N is subtracted from current army size\n/N - current army
-    size is divided by N\n%N - current army is mod by N"
+    powerup. Coming in contact with the boss means you automatically lose. There
+    is a limit to the size of your army.\n\nSymbols: \n+N -  current army is increased
+    by N\nxN - current army size is multiplied by that amount\n-N - N is subtracted
+    from current army size\n/N - current army size is divided by N\n%N - current
+    army is mod by N"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7dae4d62601c29b4795ae28561abc503, type: 2}
   m_sharedMaterial: {fileID: 6862089196463006733, guid: 7dae4d62601c29b4795ae28561abc503, type: 2}
